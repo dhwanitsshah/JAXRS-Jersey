@@ -1,0 +1,18 @@
+#idProductItems{
+    border-width: 5px;
+    border-style: ridge;
+}
+
+#IdItemsSpecification{
+    border-width: 3px;
+    border-style: dotted;
+}
+
+a {
+    text-decoration: none;
+    color : inherit;
+}
+
+.activeTab{
+    color : red;
+}

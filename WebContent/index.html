@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="store">
+    <head>
+        <title>
+            Example of Controller
+        </title>
+        <script src="./lib/angular.min.js"></script>
+        <script src="./lib/jquery-2.1.1.min.js"></script>
+        <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
+        <script src="./app.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css">
+        <!--<link rel="stylesheet" href="components/bootstrap-3.1.1/css/bootstrap.min.css" type="text/css">-->
+        
+    </head>
+    <body>
+        <div ng-controller="StoreController as store">
+            <div ng-repeat="product in store.products" id="idProductItems">
+                <h1>Name: {{product.name}}</h1>
+                <h2>Price: {{product.price | currency}}</h2>
+                <h3>Description: {{product.description}}</h3>
+                <p>
+                    <img ng-src="{{product.image}}">
+                </p>
+                <div id="idTabs" ng-controller="TabController as tab">
+                    <li ng-class="{activeTab:tab.isTabSelected(1)}"><input type="button" value="Product Description" ng-click="tab.setTab(1)"/></li>
+                    <li ng-class="{activeTab:tab.isTabSelected(2)}"><input type="button" ng-click="tab.setTab(2)" value="Product Review"/></li>
+                    <p>
+                        <div id="IdItemsSpecification">
+                            <div ng-show="tab.isTabSelected(1)">
+                                {{product.description}}
+                            </div>
+                            <div ng-show="tab.isTabSelected(2)">
+                                <div ng-repeat="review in product.reviews">
+                                    <p>{{review}}</p>
+                                </div>
+                                <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)">
+                                    <textarea ng-model="reviewCtrl.newReview" placeholder="Write your review"></textarea>
+                                    <p>
+                                        Your review of {{product.name}} is: {{reviewCtrl.newReview}}
+                                    </p>
+                                    <input type="submit" value="Submit Review"/>
+                                    <div>
+                                    
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
